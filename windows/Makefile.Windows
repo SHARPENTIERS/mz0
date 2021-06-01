@@ -1,0 +1,20 @@
+CC = cl
+CFLAGS = /EHsc /O2
+
+all: mz0c.exe
+
+release: all
+	md windows\release || true
+	copy mz0c.exe windows\release
+
+.cc.o:
+	$(CC) $(CFLAGS) /c $<
+	
+mz0c.exe: mz0c.c
+	$(CC) $(CFLAGS) /Fe$@ mz0c.c
+
+clean:
+	del *.obj
+
+realclean: clean
+	del mz0c.exe

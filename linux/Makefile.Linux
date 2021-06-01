@@ -1,0 +1,20 @@
+CC = gcc
+CFLAGS = -Wall -O3
+
+all:  mz0c
+
+release: all
+	mkdir linux/release || true
+	cp mz0c linux/release
+
+.cc.o:
+	$(CC) $(CFLAGS) -c $<
+	
+mz0c: mz0c.c
+	$(CC) $(CFLAGS) -o $@ $^
+
+clean:
+	rm -f *.o core
+
+realclean: clean
+	rm -f mz0c
